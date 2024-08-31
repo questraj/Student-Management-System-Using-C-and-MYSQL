@@ -1,16 +1,16 @@
 #include <stdio.h>
 #include <mysql.h>
-#include<string.h>
 
 
+//entering the required data for connection enter your own if you are using it
 static char* host = "localhost";
 static char* user = "root";
 static char* pass = "password";
 static char* dbname = "student";
-
 unsigned int port = 3306;
 static char* unix_socket = NULL;
 unsigned int flag = 0;
+
 
 void show_error(MYSQL* conn);
 void make_table(MYSQL* conn);
@@ -24,11 +24,12 @@ void search_id(MYSQL* conn);
 void search_grade(MYSQL* conn);
 void search_age(MYSQL* conn);
 
+
 MYSQL* conn;
 
 int main()
 {
-    conn = mysql_init(NULL);
+    conn = mysql_init(NULL);//intitalizing the connection withdatabase
     if (!(mysql_real_connect(conn, host, user, pass, dbname, port, unix_socket, flag)))
     {
         show_error(conn);
@@ -38,14 +39,10 @@ int main()
 
     make_table(conn);
 
-	//char username[20], password[20];
+	
     int choice;
 	show_error(conn);
 	printf("*****Welcome to Student Management System*****");
-	//printf("\n\n Enter your Username: ");
-	//scanf("%s", &username);
-	//printf("\n Enter your Password: ");
-	//scanf("%s", &password);
     printf("\n Choose\n 1. Create Record\n 2. Read Records\n 3. Update records\n 4. Delete records\n 5. Advanced search");
 	printf("\n Enter your choice: ");
     scanf_s("%d", &choice);
@@ -228,7 +225,6 @@ void advancedsearch()
     default:
         printf("Enter Correct Choice");
         break;
-
     }
 }
 
